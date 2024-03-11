@@ -175,7 +175,7 @@ const Calculator = ({category}) => {
                             <br></br>
                             <p>Reference:</p>
                             <div>
-                                <img src={"./enisa.png"} alt="ENISA Table"/>
+                                <img src={"/public/enisa.png"} alt="ENISA Table"/>
                             </div>
                         </div>
                         <div>
