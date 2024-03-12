@@ -69,6 +69,10 @@ body {
   background-color: #d08642;
 }
 
+.list-choice-selected:hover {
+  cursor: pointer;
+}
+
 ul {
   width: 100%;
   justify-content: center;

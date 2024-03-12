@@ -7,6 +7,7 @@ const Calculator = ({category}) => {
     const [currentCategory, setCurrentCategory] = useState(0)
     const [selectedList, setSelectedList] = useState([])
     const [nextButtonState, setNextButtonState] = useState(true)
+    const [nextButtonPressed, setNextButtonPressed] = useState(true)
     const [severityScore, setSeverityScore] = useState(0)
     const [severityLevel, setSeverityLevel] = useState("")
 
@@ -22,9 +23,15 @@ const Calculator = ({category}) => {
             }])
         }
         else{
-            selectedList[objIndex].choiceIndex = choiceIndex
-            selectedList[objIndex].score = score            
-            setSelectedList([...selectedList])
+            if (selectedList[objIndex].category == currentCategory && selectedList[objIndex].subCategory == subCategory_id && selectedList[objIndex].choiceIndex == choiceIndex){
+                const newList = selectedList.filter(item => item.category != currentCategory && item.subCategory != subCategory_id && item.choiceIndex != choiceIndex)
+                setSelectedList(s => [newList])
+            }
+            else{
+                selectedList[objIndex].choiceIndex = choiceIndex
+                selectedList[objIndex].score = score            
+                setSelectedList([...selectedList])
+            }
         }
     }
 
@@ -41,27 +48,31 @@ const Calculator = ({category}) => {
 
     useEffect(() => {
         if(currentCategory < category.length){
-        checkAllSelected(currentCategory)
+            checkAllSelected(currentCategory)
         }
-    },)
+    }, [selectedList])
+
+    useEffect(() => {
+        if(currentCategory < category.length){
+            checkAllSelected(currentCategory)
+            scrollToTop()
+        }
+    }, [currentCategory])
 
     useEffect(()=>{
-        setCurrentCategory(currentCategory)
+            setCurrentCategory(currentCategory)
     }, [nextButtonState])
 
-
     function scrollToTop(){
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
+        setTimeout(function () {
+            window.scrollTo({top: 0, behavior: 'smooth'})
+        },100);
     }
 
     function checkAllSelected(currentCategory){
-        const subCategoryLength = category[currentCategory].subCategory.length
+        // const subCategoryLength = category[currentCategory].subCategory.length
         const count = selectedList.filter(item => item.category == currentCategory).length
-        count == subCategoryLength ? setNextButtonState(false) : setNextButtonState(true)
+        count >= 1 ? setNextButtonState(false) : setNextButtonState(true)
     }
 
     const onBackClick = () => {
@@ -70,13 +81,11 @@ const Calculator = ({category}) => {
         }
         else{
             setCurrentCategory(c => c-1)
-            scrollToTop()
         }
     }
 
     const onNextClick = () => {
         setCurrentCategory(c => c+1)
-        setNextButtonPressed(c => c+1)
     }
 
     const onSubmitClick = () => {
