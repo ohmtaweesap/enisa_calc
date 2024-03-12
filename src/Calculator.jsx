@@ -66,7 +66,7 @@ const Calculator = ({category}) => {
     function scrollToTop(){
         setTimeout(function () {
             window.scrollTo({top: 0, behavior: 'smooth'})
-        },100);
+        },50);
     }
 
     function checkAllSelected(currentCategory){
