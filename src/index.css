@@ -53,9 +53,15 @@ body {
   margin: 10px;
 }
 
-.list-choice:hover {
-  cursor: pointer;
-  background-color: #d08642;
+@media (hover: hover) and (pointer: fine) {
+  .list-choice:hover {
+    cursor: pointer;
+    background-color: #d08642;
+  }
+  
+  .list-choice-selected:hover {
+    cursor: pointer;
+  }
 }
 
 .list-choice-selected {
@@ -69,9 +75,7 @@ body {
   background-color: #d08642;
 }
 
-.list-choice-selected:hover {
-  cursor: pointer;
-}
+
 
 ul {
   width: 100%;
