@@ -23,8 +23,8 @@ const Calculator = ({category}) => {
         }
         else{
             if (selectedList[objIndex].category == currentCategory && selectedList[objIndex].subCategory == subCategory_id && selectedList[objIndex].choiceIndex == choiceIndex){
-                const newList = selectedList.filter(item => item.category != currentCategory && item.subCategory != subCategory_id && item.choiceIndex != choiceIndex)
-                setSelectedList(s => [newList])
+                console.log("check all variable correct")
+                setSelectedList(selectedList => {return selectedList.filter((selectedList, i) => i !== objIndex)})
             }
             else{
                 selectedList[objIndex].choiceIndex = choiceIndex
