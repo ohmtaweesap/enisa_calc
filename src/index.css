@@ -14,8 +14,19 @@
   text-align: center;
   padding: 10px;
   background-color: rgb(255, 255, 255);
-  overflow: scroll;
+  /* overflow: scroll; */
 }
+
+.firstPage-container {
+  margin: 20px auto;
+  max-width: 950px;
+  border-radius: 15px;
+  text-align: center;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  /* overflow: scroll; */
+}
+
 
 .image-container {
   border: 3px solid;
@@ -191,4 +202,18 @@ button:hover {
   padding-top: 10px;
 }
 
+.description-list{
+  text-align: left;
+  margin: 20px;
+}
 
+.link{
+  font-size: 1.5em;
+}
+
+.recommendation-container{
+  border: 3px solid;
+  border-radius: 10px;
+  background-color: #d08642;
+  margin: 10px;
+}

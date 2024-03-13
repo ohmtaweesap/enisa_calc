@@ -3,7 +3,10 @@ import { questions } from "./Questions";
 
 function App() {
   return (
-    <Calculator category ={questions.category} />
+    <>
+      <Calculator category ={questions.category} />
+      <></>
+    </>
   );
 }
 

@@ -4,10 +4,9 @@ import { useEffect, useState } from "react"
 
 const Calculator = ({category}) => {
 
-    const [currentCategory, setCurrentCategory] = useState(0)
+    const [currentCategory, setCurrentCategory] = useState(-1)
     const [selectedList, setSelectedList] = useState([])
     const [nextButtonState, setNextButtonState] = useState(true)
-    const [nextButtonPressed, setNextButtonPressed] = useState(true)
     const [severityScore, setSeverityScore] = useState(0)
     const [severityLevel, setSeverityLevel] = useState("")
 
@@ -129,7 +128,7 @@ const Calculator = ({category}) => {
 
     return (
         <div>
-            {currentCategory < category.length ?
+            {currentCategory < category.length && currentCategory >= 0 ?
                 <div className="category-container">
                     {
                     <div>
@@ -173,25 +172,48 @@ const Calculator = ({category}) => {
                 </div>
                 : 
 
-                //Final result page
-                <div className="result-container">
-                    <h1 className="breach-header">Breach</h1>
-                    <div>
-                        <h3>คะแนน: {severityScore}</h3>
-                        <h3>ระดับความร้ายแรงของเหตุการละเมิดข้อมูลส่วนบุคคล:</h3>
-                        {severityLevel === "low" ? <a className="low">ระดับต่ำ</a>: severityLevel === "mid" ? <a className="mid">ระดับกลาง</a>: severityLevel === "high" ? <a className="high">ระดับสูง</a>: <a className="veryHigh">ระดับสูงมาก</a>}
+                //First Page
+                <>
+                    {currentCategory == -1 ? 
+                    <div className="firstPage-container">
                         <div>
-                            <br></br>
-                            <p>Reference:</p>
-                            <div>
-                                <img src={"enisa.png"} alt="ENISA Table"/>
+                            <h1 className="breach-header">การคำนวนระดับความร้ายแรงของเหตุการละเมิดข้อมูลส่วนบุคคล</h1>
+                            <div className="recommendation-container">
+                                <h2>คำแนะนำการใช้งาน: </h2>
+                                    <p className="description-list">1. การคำนวนนี้ สำหรับเหตุการละเมิดที่มีความเสี่ยงที่จะกระทบต่อสิทธิและเสรีภาพของบุคคลเท่านั้น ดังนั้น ผู้ใช้งานจะต้องประเมินแล้วว่าเหตุการละเมิดของบุคคนั้นมีความเสี่ยงที่จะกระทบต่อสิทธิและเสรีภาพของบุคคลก่อนจะใช้งานแบบการประเมินนี้</p>
+                                    <p className="description-list">2. แบบการประเมินนี้ มีวัตถุประสงค์เพื่อช่วยให้ผู้ใช้งานสามารถประเมินระดับความร้ายแรงของความเสี่ยงได้ในเบื้องต้นเท่านั้น ไม่สามารถนำมาเป็นหลักการเดียวในการปรับใช้ได้ ผู้ใช้งานควรประเมินปัจจัยอื่นๆ ร่วมด้วยตามที่ระบุไว้ในกฎหมาย</p>
+                                    <p className="description-list">3. แบบการประเมินนี้ นำมาจาก Recommendations for a methodology of the assessment of severity of personal data breaches Working Document, v1.0, December 2013 ของ European Union Agency for Network and Information Security (ENISA) ผู้ใช้งานสามารถศึกษาเพิ่มเติมได้ที่ 
+                                        <a className="link" href="https://www.enisa.europa.eu/publications/dbn-severity" target="_blank">ENISA link</a>
+                                    </p>
                             </div>
                         </div>
                         <div>
-                            <button className="back-button" onClick={() => location.reload()}>Restart</button>
+                            <button className="submit-button" onClick={() => setCurrentCategory(0)}>Start !</button>
                         </div>
                     </div>
-                </div>}
+                    :
+                    //Final result page
+                    <div className="result-container">
+                        <h1 className="breach-header">Breach</h1>
+                        <div>
+                            <h3>คะแนน: {severityScore}</h3>
+                            <h3>ระดับความร้ายแรงของเหตุการละเมิดข้อมูลส่วนบุคคล:</h3>
+                            {severityLevel === "low" ? <a className="low">ระดับต่ำ</a>: severityLevel === "mid" ? <a className="mid">ระดับกลาง</a>: severityLevel === "high" ? <a className="high">ระดับสูง</a>: <a className="veryHigh">ระดับสูงมาก</a>}
+                            <div>
+                                <br></br>
+                                <p>Reference:</p>
+                                <div>
+                                    <img src={"enisa.png"} alt="ENISA Table"/>
+                                </div>
+                            </div>
+                            <div>
+                                <button className="back-button" onClick={() => location.reload()}>Restart</button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </>
+            }
         </div>
     );
 }
